@@ -1,0 +1,66 @@
+#:import random random
+<Button>:
+    font_size: 30
+    color: 1,1,1,1
+
+<Label>:
+    font_size: 26
+
+<MainScreen>:
+    FloatLayout:
+        size_hint: 1, 0.5
+        Button:
+            size_hint: 1, 0.5
+            pos_hint: {'top':1}
+            text: 'Новая игра'
+            on_press:
+                root.manager.transition.direction = 'down'
+                root.manager.current = 'quests'
+        Button:
+            size_hint: 0.5, 0.5
+            pos_hint: {'bottom':1, 'left':1}
+            text: "Таблица рекордов"
+        Button:
+            size_hint: 0.5, 0.5
+            pos_hint: {'bottom':1, 'right':1}
+            text: 'Настройки'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'settings'
+
+<SettingsScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 0.2, 1
+        Button:
+            text: '...'
+        Button:
+            text: '...'
+        Button:
+            text: '...'
+        Button:
+            text: '<-'
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'main'
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 0.8, 0.75
+        pos_hint: {'top':1, 'right':1}
+        Button:
+            id: dropdown_btn
+            text: 'Выбрать игрока...'
+            background_color: 0,0,0,0
+            background_normal: ''
+        Label:
+            text: 'Setting 2'
+        Label:
+            text: 'Setting 3'
+
+<QuestChooseScreen>
+    GridLayout:
+        cols: 2
+        padding: 20, 160
+        Button:
+            text: 'ЗАО\n(Запад Москвы)'
+            size_hint: 1, 1
