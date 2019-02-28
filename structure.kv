@@ -1,4 +1,5 @@
 #:import random random
+#:import os os
 <Button>:
     font_size: 30
     color: 1,1,1,1
@@ -38,11 +39,14 @@
             text: '...'
         Button:
             text: '...'
-        Button:
-            text: '<-'
+        ImageButton:
+            source: 'icons/back.png'
+            size_hint: 1, .2
+            pos_hint: {'left':1, 'bottom':1}
             on_press:
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'main'
+
     BoxLayout:
         orientation: 'vertical'
         size_hint: 0.8, 0.75
@@ -53,14 +57,21 @@
             background_color: 0,0,0,0
             background_normal: ''
         Label:
-            text: 'Setting 2'
+            text: os.getcwd()
         Label:
             text: 'Setting 3'
 
-<QuestChooseScreen>
+<QuestChooseScreen>:
     GridLayout:
         cols: 2
         padding: 20, 160
         Button:
             text: 'ЗАО\n(Запад Москвы)'
             size_hint: 1, 1
+    ImageButton:
+        source: 'icons/back.png'
+        size_hint: .2, .2
+        pos_hint: {'left':1, 'bottom':1}
+        on_press:
+            root.manager.transition.direction = 'up'
+            root.manager.current = 'main'
