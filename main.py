@@ -12,6 +12,7 @@ Config.set('graphics', 'width', '1080')
 Config.set('graphics', 'height', '1920')
 '''
 
+
 def console_debug_output(instance):
     print('Element', instance.text, 'built succesfully.')
 
@@ -45,15 +46,19 @@ class QuestChooseScreen(Screen):
     pass
 
 
+class QZAOBeginScreen(Screen):
+    pass
+
+
 sm = ScreenManager()
 sm.add_widget(MainScreen(name='main'))
 sm.add_widget(SettingsScreen(name='settings'))
 sm.add_widget(QuestChooseScreen(name='quests'))
+sm.add_widget(QZAOBeginScreen(name='qzaobegin'))
 
 
 class SightsApp(App):
     question = NumericProperty(0)
-    im = Image(source = 'icons/back.png')
 
     def build(self):
         return sm

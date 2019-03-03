@@ -1,5 +1,7 @@
 #:import random random
 #:import os os
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
 <Button>:
     font_size: 30
     color: 1,1,1,1
@@ -15,19 +17,23 @@
             pos_hint: {'top':1}
             text: 'Новая игра'
             on_press:
+                root.manager.transition = SlideTransition()
                 root.manager.transition.direction = 'down'
                 root.manager.current = 'quests'
         Button:
             size_hint: 0.5, 0.5
             pos_hint: {'bottom':1, 'left':1}
             text: "Таблица рекордов"
+            disabled: True
         Button:
             size_hint: 0.5, 0.5
             pos_hint: {'bottom':1, 'right':1}
             text: 'Настройки'
             on_press:
+                root.manager.transition = SlideTransition()
                 root.manager.transition.direction = 'left'
                 root.manager.current = 'settings'
+            disabled: True
 
 <SettingsScreen>:
     BoxLayout:
@@ -44,6 +50,7 @@
             size_hint: 1, .2
             pos_hint: {'left':1, 'bottom':1}
             on_press:
+                root.manager.transition = SlideTransition()
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'main'
 
@@ -68,10 +75,39 @@
         Button:
             text: 'ЗАО\n(Запад Москвы)'
             size_hint: 1, 1
+            on_press:
+                root.manager.transition = NoTransition()
+                root.manager.current = 'qzaobegin'
     ImageButton:
         source: 'icons/back.png'
         size_hint: .2, .2
         pos_hint: {'left':1, 'bottom':1}
         on_press:
+            root.manager.transition = SlideTransition()
             root.manager.transition.direction = 'up'
             root.manager.current = 'main'
+
+<QZAOBeginScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            size_hint: 1,.15
+            text: 'Какой из этих гербов\nпринадлежит ЗАО?'
+        GridLayout:
+            cols: 2
+            rows: 2
+            ImageButton:
+                source: 'icons/m_uzao.png'
+            Button:
+                text: '1'
+            Button:
+                text: '1'
+            Button:
+                text: '1'
+    ImageButton:
+        source: 'icons/back.png'
+        size_hint: .15,.15
+        pos_hint: {'left':1, 'top':1}
+        on_press:
+            root.manager.transition = NoTransition()
+            root.manager.current = 'quests'
