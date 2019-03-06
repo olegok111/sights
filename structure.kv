@@ -2,6 +2,11 @@
 #:import os os
 #:import NoTransition kivy.uix.screenmanager.NoTransition
 #:import SlideTransition kivy.uix.screenmanager.SlideTransition
+#:import score main.score
+#:import exitus main.exit_action
+#:import pwrite dbwrite.pwrite
+#:import pget dbwrite.pget
+#:set current_player 'nond'
 <Button>:
     font_size: 30
     color: 1,1,1,1
@@ -9,10 +14,15 @@
 <Label>:
     font_size: 26
 
+<ImageButton>:
+    padding: 10
+
 <MainScreen>:
     FloatLayout:
+        id: main_scr_layout
         size_hint: 1, 0.5
         Button:
+            id: main_scr_new_game
             size_hint: 1, 0.5
             pos_hint: {'top':1}
             text: 'Новая игра'
@@ -21,11 +31,13 @@
                 root.manager.transition.direction = 'down'
                 root.manager.current = 'quests'
         Button:
+            id: main_scr_exit_button
             size_hint: 0.5, 0.5
             pos_hint: {'bottom':1, 'left':1}
-            text: "Таблица рекордов"
-            disabled: True
+            text: "Выход"
+            on_press: exitus(self)
         Button:
+            id: main_scr_settings_button
             size_hint: 0.5, 0.5
             pos_hint: {'bottom':1, 'right':1}
             text: 'Настройки'
@@ -77,7 +89,7 @@
             size_hint: 1, 1
             on_press:
                 root.manager.transition = NoTransition()
-                root.manager.current = 'qzaobegin'
+                root.manager.current = 'qzao1'
     ImageButton:
         source: 'icons/back.png'
         size_hint: .2, .2
@@ -87,23 +99,29 @@
             root.manager.transition.direction = 'up'
             root.manager.current = 'main'
 
-<QZAOBeginScreen>:
+
+
+<ZAO1>:
+    id: qzao1
     BoxLayout:
         orientation: 'vertical'
         Label:
             size_hint: 1,.15
-            text: 'Какой из этих гербов\nпринадлежит ЗАО?'
+            text: 'Какой из этих гербов\nпринадлежит ЗАО? #0'
         GridLayout:
             cols: 2
             rows: 2
             ImageButton:
                 source: 'icons/m_uzao.png'
-            Button:
-                text: '1'
-            Button:
-                text: '1'
-            Button:
-                text: '1'
+            ImageButton:
+                source: 'icons/cao.png'
+            ImageButton:
+                source: 'icons/zao.png'
+                on_press:
+                    pwrite(current_player, int(pget(current_player)['points'])+5)
+                    zao1_score_label.text = str(pget(current_player)['points'])
+            ImageButton:
+                source: 'icons/vao.png'
     ImageButton:
         source: 'icons/back.png'
         size_hint: .15,.15
@@ -111,3 +129,8 @@
         on_press:
             root.manager.transition = NoTransition()
             root.manager.current = 'quests'
+    Label:
+        id: zao1_score_label
+        size_hint: .1, .1
+        pos_hint: {'right':1, 'top':1}
+        text: str(pget(current_player)['points'])

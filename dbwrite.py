@@ -39,3 +39,7 @@ def pget(player):
             _line = list(map(maybe_int, _line.split()))
             if _line[0] == player:
                 return {'points': _line[1], 'lastseen': _line[2]}
+
+
+if __name__ == '__main__':
+    print('This is the module which writes player data to the database (data/players.txt).')

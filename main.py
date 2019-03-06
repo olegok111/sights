@@ -6,11 +6,16 @@ from kivy.lang import Builder
 from kivy.properties import NumericProperty
 from kivy.uix.image import Image
 from kivy.uix.behaviors import ButtonBehavior
+from kivy.uix.floatlayout import FloatLayout
 '''
 Config.set('graphics', 'resizable', '0')
 Config.set('graphics', 'width', '1080')
 Config.set('graphics', 'height', '1920')
 '''
+
+one_img_question = 0
+four_img_question = 0
+score = 0
 
 
 def console_debug_output(instance):
@@ -18,12 +23,14 @@ def console_debug_output(instance):
 
 
 def exit_action(instance):
+    print('{} caused exitus.'.format(str(instance.id)))
+    print(instance)
     exit(0)
 
 
-def add_10(instance):
-    prev_points = dbwrite.pget(instance.text)['points']
-    dbwrite.pwrite(instance.text, prev_points+10)
+def add_points(instance, player, amount):
+    prev_points = dbwrite.pget(player)['points']
+    dbwrite.pwrite(player, prev_points+amount)
 
 
 class ImageButton(ButtonBehavior, Image):
@@ -46,7 +53,7 @@ class QuestChooseScreen(Screen):
     pass
 
 
-class QZAOBeginScreen(Screen):
+class ZAO1(Screen):
     pass
 
 
@@ -54,13 +61,12 @@ sm = ScreenManager()
 sm.add_widget(MainScreen(name='main'))
 sm.add_widget(SettingsScreen(name='settings'))
 sm.add_widget(QuestChooseScreen(name='quests'))
-sm.add_widget(QZAOBeginScreen(name='qzaobegin'))
 
 
 class SightsApp(App):
-    question = NumericProperty(0)
 
     def build(self):
+
         return sm
 
 
