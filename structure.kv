@@ -272,6 +272,9 @@
                 halign: 'center'
             Button:
                 text: 'Площадь Европы'
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = 'ending_screen'
             Button:
                 text: 'Площадь Индиры Ганди'
             Button:
@@ -294,3 +297,17 @@
         size_hint: .1, .1
         pos_hint: {'right':1, 'top':1}
         text: ''
+
+<EndingScreen>:
+    id:ending_screen
+    Label:
+        text: 'Поздравляю! Вы ответили на все вопросы по ЗАО!\nУ вас осталось ' + str(life_count(self)) + ' жизней(ь/и).'
+        halign: 'center'
+    ImageButton:
+        id: ending_screen_home_button
+        source: 'icons/home.png'
+        size_hint: .15,.15
+        pos_hint: {'top':1, 'left':1}
+        on_press:
+            root.manager.transition = NoTransition()
+            root.manager.current = 'main'

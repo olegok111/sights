@@ -40,6 +40,7 @@ def life_count(instance):
         sm.transition = NoTransition()
         sm.current = 'main'
     print(lives)
+    return lives
 
 
 class ImageButton(ButtonBehavior, Image):
@@ -58,6 +59,7 @@ class ZAO2(Screen): pass
 class ZAO3(Screen): pass
 class ZAO4(Screen): pass
 class ZAO4A(Screen): pass
+class EndingScreen(Screen): pass
 
 
 sm.add_widget(MainScreen(name='main'))
@@ -68,6 +70,7 @@ sm.add_widget(ZAO2(name='qzao2'))
 sm.add_widget(ZAO3(name='qzao3'))
 sm.add_widget(ZAO4(name='qzao4'))
 sm.add_widget(ZAO4A(name='qzao4a'))
+sm.add_widget(EndingScreen(name='ending_screen'))
 
 
 class SightsApp(App):
