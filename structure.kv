@@ -2,8 +2,8 @@
 #:import os os
 #:import NoTransition kivy.uix.screenmanager.NoTransition
 #:import SlideTransition kivy.uix.screenmanager.SlideTransition
-#:import score main.score
 #:import exitus main.exit_action
+#:import life_count main.life_count
 #:import pwrite dbwrite.pwrite
 #:import pget dbwrite.pget
 #:set current_player 'nond'
@@ -99,29 +99,39 @@
             root.manager.transition.direction = 'up'
             root.manager.current = 'main'
 
-
-
 <ZAO1>:
     id: qzao1
+    background_color: 0,0,0,1
+    background_normal: ''
     BoxLayout:
         orientation: 'vertical'
         Label:
+            id: zao_question
             size_hint: 1,.15
             text: 'Какой из этих гербов\nпринадлежит ЗАО? #0'
+            halign: 'center'
         GridLayout:
             cols: 2
             rows: 2
             ImageButton:
-                source: 'icons/m_uzao.png'
+                id: img_btn_0
+                source: 'icons/m_uzao.jpg'
+                on_press: life_count(self)
             ImageButton:
-                source: 'icons/cao.png'
+                id: img_btn_1
+                source: 'icons/cao.jpg'
+                on_press: life_count(self)
             ImageButton:
-                source: 'icons/zao.png'
+                id: img_btn_2
+                source: 'icons/zao.jpg'
                 on_press:
                     pwrite(current_player, int(pget(current_player)['points'])+5)
-                    zao1_score_label.text = str(pget(current_player)['points'])
+                    root.manager.transition = NoTransition()
+                    root.manager.current = 'qzao2'
             ImageButton:
-                source: 'icons/vao.png'
+                id: img_btn_3
+                source: 'icons/vao.jpg'
+                on_press: life_count(self)
     ImageButton:
         source: 'icons/back.png'
         size_hint: .15,.15
@@ -133,4 +143,154 @@
         id: zao1_score_label
         size_hint: .1, .1
         pos_hint: {'right':1, 'top':1}
-        text: str(pget(current_player)['points'])
+        text: ''
+
+<ZAO2>:
+    id: qzao2
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            id: zao_question
+            size_hint: 1,.15
+            text: 'Какая из этих арок\nустановлена в ЗАО?'
+            halign: 'center'
+        GridLayout:
+            cols: 2
+            rows: 2
+            ImageButton:
+                id: img_btn_0
+                source: 'icons/arka_moskva.jpg'
+                on_press:
+                    pwrite(current_player, int(pget(current_player)['points'])+5)
+                    zao2_score_label.text = str(pget(current_player)['points'])
+                    root.manager.current = 'qzao3'
+            ImageButton:
+                id: img_btn_1
+                source: 'icons/arka_irkutsk.jpg'
+                on_press: life_count(self)
+            ImageButton:
+                id: img_btn_2
+                source: 'icons/arka_paris.jpg'
+                on_press: life_count(self)
+            ImageButton:
+                id: img_btn_3
+                source: 'icons/arka_brussels.jpeg'
+                on_press: life_count(self)
+
+    ImageButton:
+        source: 'icons/back.png'
+        size_hint: .15,.15
+        pos_hint: {'left':1, 'top':1}
+        on_press:
+            root.manager.transition = NoTransition()
+            root.manager.current = 'quests'
+    Label:
+        id: zao2_score_label
+        size_hint: .1, .1
+        pos_hint: {'right':1, 'top':1}
+        text: ''
+
+<ZAO3>:
+    id: qzao3
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            id: zao_question
+            size_hint: 1,.15
+            text: 'Когда на территорию ЗАО\nвпервые пришли люди?'
+        GridLayout:
+            cols: 2
+            rows: 2
+            Button:
+                text: '40 тыс. лет назад'
+            Button:
+                text: '2-1 тысячелетие до н.э.'
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = 'qzao4'
+            Button:
+                text: 'IX-X век н.э.'
+            Button:
+                text: '1147 год'
+    ImageButton:
+        source: 'icons/back.png'
+        size_hint: .15,.15
+        pos_hint: {'left':1, 'top':1}
+        on_press:
+            root.manager.transition = NoTransition()
+            root.manager.current = 'quests'
+    Label:
+        id: zao3_score_label
+        size_hint: .1, .1
+        pos_hint: {'right':1, 'top':1}
+        text: ''
+
+<ZAO4>:
+    id: qzao4
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            id: zao_question
+            size_hint: 1,.15
+            text: 'Где расположен этот фонтан?'
+        Image:
+            size_hint: 1,.7
+            source: 'icons/pokhischenie_evropy.jpg'
+        Button:
+            size_hint: 1,.15
+            text: 'Варианты ответа >>>'
+            on_press:
+                root.manager.trasition = NoTransition()
+                root.manager.current = 'qzao4a'
+    ImageButton:
+        source: 'icons/back.png'
+        size_hint: .15,.15
+        pos_hint: {'left':1, 'top':1}
+        on_press:
+            root.manager.transition = NoTransition()
+            root.manager.current = 'quests'
+    Label:
+        id: zao3_score_label
+        size_hint: .1, .1
+        pos_hint: {'right':1, 'top':1}
+        text: ''
+
+<ZAO4A>:
+    id: qzao4a
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            id: zao_question
+            size_hint: 1,.15
+            text: 'Где расположен этот фонтан?'
+        GridLayout:
+            size_hint: 1,.7
+            cols: 2
+            rows: 2
+            Button:
+                text: 'Площадь Дорогомиловская\nЗастава'
+                halign: 'center'
+            Button:
+                text: 'Площадь Европы'
+            Button:
+                text: 'Площадь Индиры Ганди'
+            Button:
+                text: 'Площадь Джавахарлала Неру'
+        Button:
+            size_hint: 1,.15
+            text: '<<< Картинка'
+            on_press:
+                root.manager.transition = NoTransition()
+                root.manager.current = 'qzao4'
+    ImageButton:
+        source: 'icons/back.png'
+        size_hint: .15,.15
+        pos_hint: {'left':1, 'top':1}
+        on_press:
+            root.manager.transition = NoTransition()
+            root.manager.current = 'quests'
+    Label:
+        id: zao3_score_label
+        size_hint: .1, .1
+        pos_hint: {'right':1, 'top':1}
+        text: ''
