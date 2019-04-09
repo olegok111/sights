@@ -1,5 +1,4 @@
 #:import random random
-#:import os os
 #:import NoTransition kivy.uix.screenmanager.NoTransition
 #:import SlideTransition kivy.uix.screenmanager.SlideTransition
 #:import SwapTransition kivy.uix.screenmanager.SwapTransition
@@ -9,7 +8,7 @@
 #:import score main.score
 #:import pwrite dbwrite.pwrite
 #:import pget dbwrite.pget
-#:set current_player 'nond'
+#:import current_player main.current_player
 <Button>:
     font_size: 30
     color: 1,1,1,1
@@ -23,53 +22,22 @@
 
 <MainScreen>:
     FloatLayout:
-        id: main_scr_layout
-        size_hint: 1, 0.5
         Button:
-            id: main_scr_new_game
-            size_hint: 1, 0.5
-            pos_hint: {'top':1}
             text: 'Новая игра'
+            size_hint: .4, .13
+            pos_hint: {'x':.3, 'y':.29}
             on_press:
                 root.manager.transition = SlideTransition()
                 root.manager.transition.direction = 'down'
                 root.manager.current = 'quests'
         Button:
-            id: main_scr_exit_button
-            size_hint: 0.5, 0.5
-            pos_hint: {'bottom':1, 'left':1}
-            text: "Выход"
-            on_press: exitus(self)
-        Button:
-            id: main_scr_settings_button
-            size_hint: 0.5, 0.5
-            pos_hint: {'bottom':1, 'right':1}
-            text: 'Настройки'
+            text: 'Выход'
+            size_hint: .4, .13
+            pos_hint: {'x':.3, 'y':.08}
             on_press:
-                root.manager.transition = SlideTransition()
-                root.manager.transition.direction = 'left'
-                root.manager.current = 'settings'
-            disabled: True
+                exitus(self)
 
 <SettingsScreen>:
-    BoxLayout:
-        orientation: 'vertical'
-        size_hint: 0.2, 1
-        Button:
-            text: '...'
-        Button:
-            text: '...'
-        Button:
-            text: '...'
-        ImageButton:
-            source: 'icons/back.png'
-            size_hint: 1, .2
-            pos_hint: {'left':1, 'bottom':1}
-            on_press:
-                root.manager.transition = SlideTransition()
-                root.manager.transition.direction = 'right'
-                root.manager.current = 'main'
-
     BoxLayout:
         orientation: 'vertical'
         size_hint: 0.8, 0.75
@@ -80,7 +48,7 @@
             background_color: 0,0,0,0
             background_normal: ''
         Label:
-            text: os.getcwd()
+            text: 'There... is... nothing...'
         Label:
             text: 'Setting 3'
 
@@ -506,8 +474,7 @@
             Button:
                 text: 'Олимпиада\'80'
                 on_press:
-                    root.manager.transition = FadeTransition()
-                    root.manager.current = 'ending_screen'
+                    root.manager.current = 'qzao11'
             Button:
                 text: 'Фестиваль молодежи 1957 г.'
 
@@ -525,6 +492,42 @@
         size_hint: .1, .1
         pos_hint: {'right':1, 'top':1}
         text: ''
+
+<ZAO11>:
+    id: qzao11
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            id: zao_question
+            size_hint: 1,.1
+            text: 'Почему Поклонная гора так называется?'
+        GridLayout:
+            cols: 2
+            rows: 2
+            Button:
+                text: 'Здесь встречали иностранных послов\nс поклоном'
+                on_press:
+                    root.manager.transition = FadeTransition()
+                    root.manager.current = 'ending_screen'
+            Button:
+                text: 'Этой горе поклонялись язычники'
+            Button:
+                text: 'Здесь шли правителю на поклон'
+            Button:
+                text: 'Из-за особо большого наклона'
+    ImageButton:
+        source: 'icons/back.png'
+        size_hint: .1,.1
+        pos_hint: {'left':1, 'top':1}
+        on_press:
+            root.manager.transition = NoTransition()
+            root.manager.current = 'quests'
+    Label:
+        id: zao3_score_label
+        size_hint: .1, .1
+        pos_hint: {'right':1, 'top':1}
+        text: ''
+
 
 <EndingScreen>:
     id:ending_screen

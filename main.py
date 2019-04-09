@@ -7,16 +7,18 @@ from kivy.properties import NumericProperty
 from kivy.uix.image import Image
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.screenmanager import NoTransition
-'''
+from kivy.config import Config
+
 Config.set('graphics', 'resizable', '0')
-Config.set('graphics', 'width', '1080')
-Config.set('graphics', 'height', '1920')
-'''
+Config.set('graphics', 'width', '1024')
+Config.set('graphics', 'height', '768')
+
 
 one_img_question = 0
 four_img_question = 0
 score = 0
 lives = 3
+current_player = 'nond'
 
 sm = ScreenManager()
 
@@ -58,16 +60,13 @@ class ZAO1(Screen): pass
 class ZAO2(Screen): pass
 class ZAO3(Screen): pass
 class ZAO4(Screen): pass
-class ZAO4A(Screen): pass
 class ZAO5(Screen): pass
-class ZAO5A(Screen): pass
 class ZAO6(Screen): pass
-class ZAO6A(Screen): pass
 class ZAO7(Screen): pass
 class ZAO8(Screen): pass
 class ZAO9(Screen): pass
-class ZAO9A(Screen): pass
 class ZAO10(Screen): pass
+class ZAO11(Screen): pass
 class EndingScreen(Screen): pass
 
 
@@ -78,24 +77,19 @@ sm.add_widget(ZAO1(name='qzao1'))
 sm.add_widget(ZAO2(name='qzao2'))
 sm.add_widget(ZAO3(name='qzao3'))
 sm.add_widget(ZAO4(name='qzao4'))
-sm.add_widget(ZAO4A(name='qzao4a'))
 sm.add_widget(ZAO5(name='qzao5'))
-sm.add_widget(ZAO5A(name='qzao5a'))
 sm.add_widget(ZAO6(name='qzao6'))
-sm.add_widget(ZAO6A(name='qzao6a'))
 sm.add_widget(ZAO8(name='qzao8'))
 sm.add_widget(ZAO7(name='qzao7'))
 sm.add_widget(ZAO9(name='qzao9'))
-sm.add_widget(ZAO9A(name='qzao9a'))
 sm.add_widget(ZAO10(name='qzao10'))
+sm.add_widget(ZAO11(name='qzao11'))
 sm.add_widget(EndingScreen(name='ending_screen'))
 
 
 class SightsApp(App):
-    score = NumericProperty(0)
 
     def build(self):
-
         return sm
 
 
