@@ -35,7 +35,7 @@
             size_hint: .4, .13
             pos_hint: {'x':.3, 'y':.08}
             on_press:
-                exitus(self)
+                exitus()
 
 <SettingsScreen>:
     BoxLayout:
@@ -53,18 +53,17 @@
             text: 'Setting 3'
 
 <QuestChooseScreen>:
-    GridLayout:
-        cols: 2
-        padding: 20, 160
+    FloatLayout:
         Button:
             text: 'ЗАО\n(Запад Москвы)'
-            size_hint: 1, 1
+            size_hint: 1/3, 1/3
+            pos_hint: {'x':0, 'y':1/3}
             on_press:
                 root.manager.transition = NoTransition()
                 root.manager.current = 'qzao1'
     ImageButton:
         source: 'icons/back.png'
-        size_hint: .15, .15
+        size_hint: .1, .1
         pos_hint: {'left':1, 'top':1}
         on_press:
             root.manager.transition = SlideTransition()
@@ -80,30 +79,30 @@
         Label:
             id: zao_question
             size_hint: 1,.1
-            text: 'Какой из этих гербов\nпринадлежит ЗАО?'
+            text: 'Какой из этих флагов\nпринадлежит ЗАО?'
             halign: 'center'
         GridLayout:
             cols: 2
             rows: 2
             ImageButton:
                 id: img_btn_0
-                source: 'icons/m_uzao.jpg'
-                on_press: life_count(self)
+                source: 'icons/flag_uzao.jpg'
+                on_press: life_count()
             ImageButton:
                 id: img_btn_1
-                source: 'icons/cao.jpg'
-                on_press: life_count(self)
+                source: 'icons/flag_cao.jpg'
+                on_press: life_count()
             ImageButton:
                 id: img_btn_2
-                source: 'icons/zao.jpg'
+                source: 'icons/flag_zao.jpg'
                 on_press:
                     pwrite(current_player, int(pget(current_player)['points'])+5)
                     root.manager.transition = SwapTransition()
                     root.manager.current = 'qzao2'
             ImageButton:
                 id: img_btn_3
-                source: 'icons/vao.jpg'
-                on_press: life_count(self)
+                source: 'icons/flag_vao.jpg'
+                on_press: life_count()
     ImageButton:
         source: 'icons/back.png'
         size_hint: .1,.1
@@ -140,15 +139,15 @@
             ImageButton:
                 id: img_btn_1
                 source: 'icons/arka_irkutsk.jpg'
-                on_press: life_count(self)
+                on_press: life_count()
             ImageButton:
                 id: img_btn_2
                 source: 'icons/arka_paris.jpg'
-                on_press: life_count(self)
+                on_press: life_count()
             ImageButton:
                 id: img_btn_3
                 source: 'icons/arka_brussels.jpeg'
-                on_press: life_count(self)
+                on_press: life_count()
 
     ImageButton:
         source: 'icons/back.png'
@@ -532,7 +531,7 @@
 <EndingScreen>:
     id:ending_screen
     Label:
-        text: 'Поздравляю! Вы ответили на все вопросы по ЗАО!\nУ вас осталось ' + str(life_count(self)) + ' жизней(ь/и).'
+        text: 'Поздравляю! Вы ответили на все вопросы по ЗАО!\nУ вас осталось ' + str(life_count()) + ' жизней(ь/и).'
         halign: 'center'
     ImageButton:
         id: ending_screen_home_button
@@ -542,3 +541,7 @@
         on_press:
             root.manager.transition = NoTransition()
             root.manager.current = 'main'
+
+<TooBadScreen>:
+    Label:
+        text: 'Too bad...'

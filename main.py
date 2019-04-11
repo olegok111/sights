@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-from kivy.app import App
 import dbwrite
+from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
-from kivy.properties import NumericProperty
 from kivy.uix.image import Image
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.screenmanager import NoTransition
@@ -22,20 +21,21 @@ current_player = 'nond'
 
 sm = ScreenManager()
 
+
 def console_debug_output(instance):
     print('Element', instance.text, 'built succesfully.')
 
 
-def exit_action(instance):
+def exit_action():
     exit(0)
 
 
-def add_points(instance, player, amount):
+def add_points(player, amount):
     prev_points = dbwrite.pget(player)['points']
     dbwrite.pwrite(player, prev_points+amount)
 
 
-def life_count(instance):
+def life_count():
     global lives, sm
     lives -= 1
     if lives == 0:
@@ -45,13 +45,11 @@ def life_count(instance):
     return lives
 
 
-class ImageButton(ButtonBehavior, Image):
-    pass
-
-
 with open('structure.kv', encoding='utf8') as f:
     Builder.load_string(f.read())
 
+
+class ImageButton(ButtonBehavior, Image): pass
 
 class MainScreen(Screen): pass
 class SettingsScreen(Screen): pass
