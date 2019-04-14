@@ -1,4 +1,3 @@
-#:import random random
 #:import NoTransition kivy.uix.screenmanager.NoTransition
 #:import SlideTransition kivy.uix.screenmanager.SlideTransition
 #:import SwapTransition kivy.uix.screenmanager.SwapTransition
@@ -10,61 +9,58 @@
 #:import pget dbwrite.pget
 #:import current_player main.current_player
 <Button>:
+    background_color: .8,.8,.8,1
+    background_normal: ''
     font_size: 30
-    color: 1,1,1,1
     halign : 'center'
 
 <Label>:
+    color: 0,0,0,1
     font_size: 26
 
 <ImageButton>:
     padding: 10
 
+<GridLayout>:
+    spacing: [16, 16]
+    padding: [16]
+
 <MainScreen>:
+    Image:
+        source: 'icons/title.jpg'
     FloatLayout:
+        background_color: .51,.51,.51,1
+        background_normal: ''
         Button:
             text: 'Новая игра'
             size_hint: .4, .13
-            pos_hint: {'x':.3, 'y':.29}
+            pos_hint: {'x':.3, 'y':.08}
+            background_color: .8,.8,.8,1
+            background_normal: ''
+            color: 0,0,0,1
             on_press:
                 root.manager.transition = SlideTransition()
                 root.manager.transition.direction = 'down'
                 root.manager.current = 'quests'
-        Button:
-            text: 'Выход'
-            size_hint: .4, .13
-            pos_hint: {'x':.3, 'y':.08}
-            on_press:
-                exitus()
-
-<SettingsScreen>:
-    BoxLayout:
-        orientation: 'vertical'
-        size_hint: 0.8, 0.75
-        pos_hint: {'top':1, 'right':1}
-        Button:
-            id: dropdown_btn
-            text: 'Выбрать игрока...'
-            background_color: 0,0,0,0
-            background_normal: ''
-        Label:
-            text: 'There... is... nothing...'
-        Label:
-            text: 'Setting 3'
 
 <QuestChooseScreen>:
+    Image:
+        source: 'icons/quest_choose_only_zao.jpg'
     FloatLayout:
         Button:
             text: 'ЗАО\n(Запад Москвы)'
-            size_hint: 1/3, 1/3
-            pos_hint: {'x':0, 'y':1/3}
+            size_hint: .23, .23
+            pos_hint: {'x':.295, 'y':.37}
+            background_color: .8,.8,.8,.3
+            background_normal: ''
+            color: 0,0,0,1
             on_press:
                 root.manager.transition = NoTransition()
                 root.manager.current = 'qzao1'
     ImageButton:
-        source: 'icons/back.png'
+        source: 'icons/new_back.png'
         size_hint: .1, .1
-        pos_hint: {'left':1, 'top':1}
+        pos_hint: {'x':.02, 'y':.88}
         on_press:
             root.manager.transition = SlideTransition()
             root.manager.transition.direction = 'up'
@@ -72,8 +68,11 @@
 
 <ZAO1>:
     id: qzao1
-    background_color: 0,0,0,1
-    background_normal: ''
+    canvas.before:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size: self.size
     BoxLayout:
         orientation: 'vertical'
         Label:
@@ -84,6 +83,8 @@
         GridLayout:
             cols: 2
             rows: 2
+            spacing: [16, 16]
+            padding: [16]
             ImageButton:
                 id: img_btn_0
                 source: 'icons/flag_uzao.jpg'
@@ -104,12 +105,13 @@
                 source: 'icons/flag_vao.jpg'
                 on_press: life_count()
     ImageButton:
-        source: 'icons/back.png'
-        size_hint: .1,.1
-        pos_hint: {'left':1, 'top':1}
+        source: 'icons/new_back.png'
+        size_hint: .08, .08
+        pos_hint: {'x':.01, 'y':.91}
         on_press:
-            root.manager.transition = NoTransition()
-            root.manager.current = 'quests'
+            root.manager.transition = SlideTransition()
+            root.manager.transition.direction = 'up'
+            root.manager.current = 'main'
     Label:
         id: zao1_score_label
         size_hint: .1, .1
@@ -118,6 +120,11 @@
 
 <ZAO2>:
     id: qzao2
+    canvas.before:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size: self.size
     BoxLayout:
         orientation: 'vertical'
         Label:
@@ -128,6 +135,8 @@
         GridLayout:
             cols: 2
             rows: 2
+            spacing: [16, 16]
+            padding: [16]
             ImageButton:
                 id: img_btn_0
                 source: 'icons/arka_moskva.jpg'
@@ -150,9 +159,9 @@
                 on_press: life_count()
 
     ImageButton:
-        source: 'icons/back.png'
-        size_hint: .1,.1
-        pos_hint: {'left':1, 'top':1}
+        source: 'icons/new_back.png'
+        size_hint: .08,.08
+        pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
             root.manager.current = 'quests'
@@ -164,12 +173,17 @@
 
 <ZAO3>:
     id: qzao3
+    canvas.before:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size: self.size
     BoxLayout:
         orientation: 'vertical'
         Label:
             id: zao_question
             size_hint: 1,.1
-            text: 'Когда на территорию ЗАО\nвпервые пришли люди?'
+            text: 'Когда на территорию ЗАО впервые пришли люди?'
         GridLayout:
             cols: 2
             rows: 2
@@ -185,9 +199,9 @@
             Button:
                 text: '1147 год'
     ImageButton:
-        source: 'icons/back.png'
-        size_hint: .1,.1
-        pos_hint: {'left':1, 'top':1}
+        source: 'icons/new_back.png'
+        size_hint: .08, .08
+        pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
             root.manager.current = 'quests'
@@ -199,6 +213,52 @@
 
 <ZAO4>:
     id: qzao4
+    canvas.before:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            id: zao_question
+            size_hint: 1,.1
+            font_size: 25
+            text: 'В каком районе находилось первое поселение на территории ЗАО?'
+        GridLayout:
+            cols: 2
+            rows: 2
+            Button:
+                text: 'Фили'
+            Button:
+                text: 'Строгино'
+            Button:
+                text: 'Очаково-Матвеевское'
+            Button:
+                text: 'Кунцево'
+                on_press:
+                    root.manager.transition = SwapTransition()
+                    root.manager.current = 'qzao5'
+    ImageButton:
+        source: 'icons/new_back.png'
+        size_hint: .08, .08
+        pos_hint: {'x':.01, 'y':.91}
+        on_press:
+            root.manager.transition = NoTransition()
+            root.manager.current = 'quests'
+    Label:
+        id: zao3_score_label
+        size_hint: .1, .1
+        pos_hint: {'right':1, 'top':1}
+        text: ''
+
+<ZAO5>:
+    id: qzao5
+    canvas.before:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size: self.size
     BoxLayout:
         orientation: 'vertical'
         Label:
@@ -213,20 +273,21 @@
             cols: 2
             rows: 2
             Button:
-                text: 'Площадь Дорогомиловская\nЗастава'
+                font_size: 25
+                text: 'Площадь Дорогомиловская Застава'
             Button:
                 text: 'Площадь Европы'
                 on_press:
                     root.manager.transition = SwapTransition()
-                    root.manager.current = 'qzao5'
+                    root.manager.current = 'qzao6'
             Button:
                 text: 'Площадь Индиры Ганди'
             Button:
                 text: 'Площадь Джавахарлала Неру'
     ImageButton:
-        source: 'icons/back.png'
-        size_hint: .1,.1
-        pos_hint: {'left':1, 'top':1}
+        source: 'icons/new_back.png'
+        size_hint: .08, .08
+        pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
             root.manager.current = 'quests'
@@ -237,8 +298,13 @@
         text: ''
 
 
-<ZAO5>:
-    id: qzao5
+<ZAO6>:
+    id: qzao6
+    canvas.before:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size: self.size
     BoxLayout:
         orientation: 'vertical'
         Label:
@@ -262,7 +328,8 @@
             cols: 2
             rows: 2
             Button:
-                text: 'Корпус 2\nЖК Воробьёвы Горы'
+                font_size: 24
+                text: 'Корпус 2 ЖК Воробьёвы Горы'
                 halign: 'center'
             Button:
                 text: 'Гостиница Украина'
@@ -270,13 +337,13 @@
                 text: 'Главное здание МГУ'
                 on_press:
                     root.manager.transition = SwapTransition()
-                    root.manager.current = 'qzao6'
+                    root.manager.current = 'qzao7'
             Button:
                 text: 'ЖК Дом на Мосфильмовской'
     ImageButton:
-        source: 'icons/back.png'
-        size_hint: .1,.1
-        pos_hint: {'left':1, 'top':1}
+        source: 'icons/new_back.png'
+        size_hint: .08, .08
+        pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
             root.manager.current = 'quests'
@@ -286,8 +353,13 @@
         pos_hint: {'right':1, 'top':1}
         text: ''
 
-<ZAO6>:
-    id: qzao6
+<ZAO7>:
+    id: qzao7
+    canvas.before:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size: self.size
     BoxLayout:
         orientation: 'vertical'
         Label:
@@ -312,20 +384,22 @@
             rows: 2
             pos_hint: {'bottom':1}
             Button:
+                font_size: 23
                 text: 'Детский музыкальный театр\nимени И.Н.Сац'
             Button:
+                font_size: 23
                 text: 'Театр под предводительством\nАрмена Джигарханяна'
             Button:
                 text: 'Малый театр'
                 on_press:
                     root.manager.transition = SwapTransition()
-                    root.manager.current = 'qzao7'
+                    root.manager.current = 'qzao8'
             Button:
                 text: 'Театр на Юго-Западе'
     ImageButton:
-        source: 'icons/back.png'
-        size_hint: .1,.1
-        pos_hint: {'left':1, 'top':1}
+        source: 'icons/new_back.png'
+        size_hint: .08, .08
+        pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
             root.manager.current = 'quests'
@@ -335,8 +409,13 @@
         pos_hint: {'right':1, 'top':1}
         text: ''
 
-<ZAO7>:
-    id: qzao7
+<ZAO8>:
+    id: qzao8
+    canvas.before:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size: self.size
     BoxLayout:
         orientation: 'vertical'
         Label:
@@ -354,13 +433,13 @@
                 text: '13'
                 on_press:
                     root.manager.transition = SwapTransition()
-                    root.manager.current = 'qzao8'
+                    root.manager.current = 'qzao9'
             Button:
                 text: '14'
     ImageButton:
-        source: 'icons/back.png'
-        size_hint: .1,.1
-        pos_hint: {'left':1, 'top':1}
+        source: 'icons/new_back.png'
+        size_hint: .08, .08
+        pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
             root.manager.current = 'quests'
@@ -370,8 +449,13 @@
         pos_hint: {'right':1, 'top':1}
         text: ''
 
-<ZAO8>:
-    id: qzao8
+<ZAO9>:
+    id: qzao9
+    canvas.before:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size: self.size
     BoxLayout:
         orientation: 'vertical'
         Label:
@@ -386,7 +470,7 @@
                 text: 'Дорогомилово, Крылатское,\nРаменки , Ломоносовский'
                 on_press:
                     root.manager.transition = SwapTransition()
-                    root.manager.current = 'qzao9'
+                    root.manager.current = 'qzao10'
             Button:
                 
                 text: 'Очаково-Матвеевское,\nТропарево-Никулино, Солнцево,\nПроспект Вернадского'
@@ -397,9 +481,9 @@
                 
                 text: 'Ново-Переделкино, Солнцево,\nТропарево-Никулино, Дорогомилово'
     ImageButton:
-        source: 'icons/back.png'
-        size_hint: .1,.1
-        pos_hint: {'left':1, 'top':1}
+        source: 'icons/new_back.png'
+        size_hint: .08, .08
+        pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
             root.manager.current = 'quests'
@@ -409,8 +493,13 @@
         pos_hint: {'right':1, 'top':1}
         text: ''
 
-<ZAO9>:
-    id: qzao9
+<ZAO10>:
+    id: qzao10
+    canvas.before:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size: self.size
     BoxLayout:
         orientation: 'vertical'
         Label:
@@ -434,20 +523,23 @@
             cols: 2
             rows: 2
             Button:
+                font_size: 23
                 text: 'Государственный музей\nобороны Москвы'
             Button:
+                font_size: 23
                 text: 'Музей-панорама\n"Бородинская битва"'
             Button:
+                font_size: 23
                 text: 'Музей традиционных\nрусских напитков'
             Button:
                 text: 'Музей оружия'
                 on_press:
                     root.manager.Transition = SwapTransition()
-                    root.manager.current = 'qzao10'
+                    root.manager.current = 'qzao11'
     ImageButton:
-        source: 'icons/back.png'
-        size_hint: .1,.1
-        pos_hint: {'left':1, 'top':1}
+        source: 'icons/new_back.png'
+        size_hint: .08, .08
+        pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
             root.manager.current = 'quests'
@@ -457,8 +549,13 @@
         pos_hint: {'right':1, 'top':1}
         text: ''
 
-<ZAO10>:
-    id: qzao10
+<ZAO11>:
+    id: qzao11
+    canvas.before:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size: self.size
     BoxLayout:
         orientation: 'vertical'
         Label:
@@ -473,16 +570,16 @@
             Button:
                 text: 'Олимпиада\'80'
                 on_press:
-                    root.manager.current = 'qzao11'
+                    root.manager.current = 'qzao12'
             Button:
                 text: 'Фестиваль молодежи 1957 г.'
 
             Button:
                 text: '1000-летие крещения Руси'
     ImageButton:
-        source: 'icons/back.png'
-        size_hint: .1,.1
-        pos_hint: {'left':1, 'top':1}
+        source: 'icons/new_back.png'
+        size_hint: .08, .08
+        pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
             root.manager.current = 'quests'
@@ -492,8 +589,13 @@
         pos_hint: {'right':1, 'top':1}
         text: ''
 
-<ZAO11>:
-    id: qzao11
+<ZAO12>:
+    id: qzao12
+    canvas.before:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size: self.size
     BoxLayout:
         orientation: 'vertical'
         Label:
@@ -515,9 +617,9 @@
             Button:
                 text: 'Из-за особо большого наклона'
     ImageButton:
-        source: 'icons/back.png'
-        size_hint: .1,.1
-        pos_hint: {'left':1, 'top':1}
+        source: 'icons/new_back.png'
+        size_hint: .08, .08
+        pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
             root.manager.current = 'quests'
@@ -527,21 +629,30 @@
         pos_hint: {'right':1, 'top':1}
         text: ''
 
-
 <EndingScreen>:
     id:ending_screen
+    canvas.before:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size: self.size
     Label:
         text: 'Поздравляю! Вы ответили на все вопросы по ЗАО!\nУ вас осталось ' + str(life_count()) + ' жизней(ь/и).'
         halign: 'center'
     ImageButton:
         id: ending_screen_home_button
         source: 'icons/home.png'
-        size_hint: .1,.1
+        size_hint: .08, .08
         pos_hint: {'top':1, 'left':1}
         on_press:
             root.manager.transition = NoTransition()
             root.manager.current = 'main'
 
 <TooBadScreen>:
+    canvas.before:
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size: self.size
     Label:
         text: 'Too bad...'

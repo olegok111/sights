@@ -65,6 +65,7 @@ class ZAO8(Screen): pass
 class ZAO9(Screen): pass
 class ZAO10(Screen): pass
 class ZAO11(Screen): pass
+class ZAO12(Screen): pass
 class EndingScreen(Screen): pass
 
 
@@ -82,6 +83,7 @@ sm.add_widget(ZAO7(name='qzao7'))
 sm.add_widget(ZAO9(name='qzao9'))
 sm.add_widget(ZAO10(name='qzao10'))
 sm.add_widget(ZAO11(name='qzao11'))
+sm.add_widget(ZAO12(name='qzao12'))
 sm.add_widget(EndingScreen(name='ending_screen'))
 
 
