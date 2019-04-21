@@ -18,6 +18,7 @@ four_img_question = 0
 score = 0
 lives = 3
 current_player = 'nond'
+next_screen = ''
 
 sm = ScreenManager()
 
@@ -34,16 +35,24 @@ def add_points(player, amount):
     prev_points = dbwrite.pget(player)['points']
     dbwrite.pwrite(player, prev_points+amount)
 
+def set_next_screen(name=None):
+    global next_screen
+    if name is None:
+        return next_screen
+    else:
+        next_screen = name
 
 def life_count():
-    global lives, sm
+    global lives, next_screen
     lives -= 1
     if lives == 0:
-        sm.transition = NoTransition()
-        sm.current = 'main'
+        next_screen = 'toobad_screen'
     print(lives)
     return lives
 
+def reset_lives():
+    global lives
+    lives = 3
 
 with open('structure.kv', encoding='utf8') as f:
     Builder.load_string(f.read())
@@ -67,6 +76,7 @@ class ZAO10(Screen): pass
 class ZAO11(Screen): pass
 class ZAO12(Screen): pass
 class EndingScreen(Screen): pass
+class TooBadScreen(Screen): pass
 
 
 sm.add_widget(MainScreen(name='main'))
@@ -85,6 +95,7 @@ sm.add_widget(ZAO10(name='qzao10'))
 sm.add_widget(ZAO11(name='qzao11'))
 sm.add_widget(ZAO12(name='qzao12'))
 sm.add_widget(EndingScreen(name='ending_screen'))
+sm.add_widget(TooBadScreen(name='toobad_screen'))
 
 
 class SightsApp(App):

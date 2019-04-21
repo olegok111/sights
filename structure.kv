@@ -4,10 +4,14 @@
 #:import FadeTransition kivy.uix.screenmanager.FadeTransition
 #:import exitus main.exit_action
 #:import life_count main.life_count
+#:import lives main.lives
 #:import score main.score
 #:import pwrite dbwrite.pwrite
 #:import pget dbwrite.pget
 #:import current_player main.current_player
+#:import sns main.set_next_screen
+#:import reset_lives main.reset_lives
+
 <Button>:
     background_color: .8,.8,.8,1
     background_normal: ''
@@ -41,7 +45,8 @@
             on_press:
                 root.manager.transition = SlideTransition()
                 root.manager.transition.direction = 'down'
-                root.manager.current = 'quests'
+                sns('quests')
+                root.manager.current = sns()
 
 <QuestChooseScreen>:
     Image:
@@ -56,7 +61,8 @@
             color: 0,0,0,1
             on_press:
                 root.manager.transition = NoTransition()
-                root.manager.current = 'qzao1'
+                sns('qzao1')
+                root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
         size_hint: .1, .1
@@ -64,7 +70,8 @@
         on_press:
             root.manager.transition = SlideTransition()
             root.manager.transition.direction = 'up'
-            root.manager.current = 'main'
+            sns('main')
+            root.manager.current = sns()
 
 <ZAO1>:
     id: qzao1
@@ -88,22 +95,30 @@
             ImageButton:
                 id: img_btn_0
                 source: 'icons/flag_uzao.jpg'
-                on_press: life_count()
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             ImageButton:
                 id: img_btn_1
                 source: 'icons/flag_cao.jpg'
-                on_press: life_count()
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             ImageButton:
                 id: img_btn_2
                 source: 'icons/flag_zao.jpg'
                 on_press:
                     pwrite(current_player, int(pget(current_player)['points'])+5)
                     root.manager.transition = SwapTransition()
-                    root.manager.current = 'qzao2'
+                    sns('qzao2')
+                    root.manager.current = sns()
             ImageButton:
                 id: img_btn_3
                 source: 'icons/flag_vao.jpg'
-                on_press: life_count()
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
+                
     ImageButton:
         source: 'icons/new_back.png'
         size_hint: .08, .08
@@ -111,7 +126,7 @@
         on_press:
             root.manager.transition = SlideTransition()
             root.manager.transition.direction = 'up'
-            root.manager.current = 'main'
+            sns('main')
     Label:
         id: zao1_score_label
         size_hint: .1, .1
@@ -142,21 +157,27 @@
                 source: 'icons/arka_moskva.jpg'
                 on_press:
                     pwrite(current_player, int(pget(current_player)['points'])+5)
-                    zao2_score_label.text = str(pget(current_player)['points'])
                     root.manager.transition = SwapTransition()
-                    root.manager.current = 'qzao3'
+                    sns('qzao3')
+                    root.manager.current = sns()
             ImageButton:
                 id: img_btn_1
                 source: 'icons/arka_irkutsk.jpg'
-                on_press: life_count()
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             ImageButton:
                 id: img_btn_2
                 source: 'icons/arka_paris.jpg'
-                on_press: life_count()
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             ImageButton:
                 id: img_btn_3
                 source: 'icons/arka_brussels.jpeg'
-                on_press: life_count()
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
 
     ImageButton:
         source: 'icons/new_back.png'
@@ -164,7 +185,8 @@
         pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
-            root.manager.current = 'quests'
+            sns('quests')
+            root.manager.current = sns()
     Label:
         id: zao2_score_label
         size_hint: .1, .1
@@ -189,22 +211,33 @@
             rows: 2
             Button:
                 text: '40 тыс. лет назад'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 text: '2-1 тысячелетие до н.э.'
                 on_press:
                     root.manager.transition = SwapTransition()
-                    root.manager.current = 'qzao4'
+                    sns('qzao4')
+                    root.manager.current = sns()
             Button:
                 text: 'IX-X век н.э.'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 text: '1147 год'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
         size_hint: .08, .08
         pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
-            root.manager.current = 'quests'
+            sns('quests')
+            root.manager.current = sns()
     Label:
         id: zao3_score_label
         size_hint: .1, .1
@@ -230,22 +263,33 @@
             rows: 2
             Button:
                 text: 'Фили'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 text: 'Строгино'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 text: 'Очаково-Матвеевское'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 text: 'Кунцево'
                 on_press:
                     root.manager.transition = SwapTransition()
-                    root.manager.current = 'qzao5'
+                    sns('qzao5')
+                    root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
         size_hint: .08, .08
         pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
-            root.manager.current = 'quests'
+            sns('quests')
+            root.manager.current = sns()
     Label:
         id: zao3_score_label
         size_hint: .1, .1
@@ -275,22 +319,33 @@
             Button:
                 font_size: 25
                 text: 'Площадь Дорогомиловская Застава'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 text: 'Площадь Европы'
                 on_press:
                     root.manager.transition = SwapTransition()
-                    root.manager.current = 'qzao6'
+                    sns('qzao6')
+                    root.manager.current = sns()
             Button:
                 text: 'Площадь Индиры Ганди'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 text: 'Площадь Джавахарлала Неру'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
         size_hint: .08, .08
         pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
-            root.manager.current = 'quests'
+            sns('quests')
+            root.manager.current = sns()
     Label:
         id: zao4_score_label
         size_hint: .1, .1
@@ -330,23 +385,33 @@
             Button:
                 font_size: 24
                 text: 'Корпус 2 ЖК Воробьёвы Горы'
-                halign: 'center'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 text: 'Гостиница Украина'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 text: 'Главное здание МГУ'
                 on_press:
                     root.manager.transition = SwapTransition()
-                    root.manager.current = 'qzao7'
+                    sns('qzao7')
+                    root.manager.current = sns()
             Button:
                 text: 'ЖК Дом на Мосфильмовской'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
         size_hint: .08, .08
         pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
-            root.manager.current = 'quests'
+            sns('quests')
+            root.manager.current = sns()
     Label:
         id: zao5_score_label
         size_hint: .1, .1
@@ -386,23 +451,34 @@
             Button:
                 font_size: 23
                 text: 'Детский музыкальный театр\nимени И.Н.Сац'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 font_size: 23
                 text: 'Театр под предводительством\nАрмена Джигарханяна'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 text: 'Малый театр'
                 on_press:
                     root.manager.transition = SwapTransition()
-                    root.manager.current = 'qzao8'
+                    sns('qzao8')
+                    root.manager.current = sns()
             Button:
                 text: 'Театр на Юго-Западе'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
         size_hint: .08, .08
         pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
-            root.manager.current = 'quests'
+            sns('quests')
+            root.manager.current = sns()
     Label:
         id: zao6_score_label
         size_hint: .1, .1
@@ -427,22 +503,33 @@
             rows: 2
             Button:
                 text: '9'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 text: '10'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 text: '13'
                 on_press:
                     root.manager.transition = SwapTransition()
-                    root.manager.current = 'qzao9'
+                    sns('qzao9')
+                    root.manager.current = sns()
             Button:
                 text: '14'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
         size_hint: .08, .08
         pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
-            root.manager.current = 'quests'
+            sns('quests')
+            root.manager.current = sns()
     Label:
         id: zao3_score_label
         size_hint: .1, .1
@@ -470,23 +557,31 @@
                 text: 'Дорогомилово, Крылатское,\nРаменки , Ломоносовский'
                 on_press:
                     root.manager.transition = SwapTransition()
-                    root.manager.current = 'qzao10'
+                    sns('qzao10')
+                    root.manager.current = sns()
             Button:
-                
                 text: 'Очаково-Матвеевское,\nТропарево-Никулино, Солнцево,\nПроспект Вернадского'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
-                
                 text: 'Кунцево, Можайский, Филевский\nпарк, Фили-Давыдково, Внуково'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
-                
                 text: 'Ново-Переделкино, Солнцево,\nТропарево-Никулино, Дорогомилово'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
         size_hint: .08, .08
         pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
-            root.manager.current = 'quests'
+            sns('quests')
+            root.manager.current = sns()
     Label:
         id: zao3_score_label
         size_hint: .1, .1
@@ -525,24 +620,35 @@
             Button:
                 font_size: 23
                 text: 'Государственный музей\nобороны Москвы'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 font_size: 23
                 text: 'Музей-панорама\n"Бородинская битва"'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 font_size: 23
                 text: 'Музей традиционных\nрусских напитков'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 text: 'Музей оружия'
                 on_press:
                     root.manager.Transition = SwapTransition()
-                    root.manager.current = 'qzao11'
+                    sns('qzao11')
+                    root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
         size_hint: .08, .08
         pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
-            root.manager.current = 'quests'
+            sns('quests')
+            root.manager.current = sns()
     Label:
         id: zao9_score_label
         size_hint: .1, .1
@@ -567,22 +673,32 @@
             rows: 2
             Button:
                 text: 'Чемпионат мира по футболу\n2014 г.'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 text: 'Олимпиада\'80'
                 on_press:
-                    root.manager.current = 'qzao12'
+                    sns('qzao12')
+                    root.manager.current = sns()
             Button:
                 text: 'Фестиваль молодежи 1957 г.'
-
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 text: '1000-летие крещения Руси'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
         size_hint: .08, .08
         pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
-            root.manager.current = 'quests'
+            sns('quests')
+            root.manager.current = sns()
     Label:
         id: zao3_score_label
         size_hint: .1, .1
@@ -609,20 +725,31 @@
                 text: 'Здесь встречали иностранных послов\nс поклоном'
                 on_press:
                     root.manager.transition = FadeTransition()
-                    root.manager.current = 'ending_screen'
+                    sns('ending_screen')
+                    root.manager.current = sns()
             Button:
                 text: 'Этой горе поклонялись язычники'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 text: 'Здесь шли правителю на поклон'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
             Button:
                 text: 'Из-за особо большого наклона'
+                on_press:
+                    life_count()
+                    root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
         size_hint: .08, .08
         pos_hint: {'x':.01, 'y':.91}
         on_press:
             root.manager.transition = NoTransition()
-            root.manager.current = 'quests'
+            sns('quests')
+            root.manager.current = sns()
     Label:
         id: zao3_score_label
         size_hint: .1, .1
@@ -637,7 +764,7 @@
         Rectangle:
             size: self.size
     Label:
-        text: 'Поздравляю! Вы ответили на все вопросы по ЗАО!\nУ вас осталось ' + str(life_count()) + ' жизней(ь/и).'
+        text: 'Поздравляю! Вы ответили на все вопросы по ЗАО!\nУ вас осталось ' + str(lives) + ' жизней(ь/и).'
         halign: 'center'
     ImageButton:
         id: ending_screen_home_button
@@ -646,7 +773,7 @@
         pos_hint: {'top':1, 'left':1}
         on_press:
             root.manager.transition = NoTransition()
-            root.manager.current = 'main'
+            sns('main')
 
 <TooBadScreen>:
     canvas.before:
@@ -655,4 +782,14 @@
         Rectangle:
             size: self.size
     Label:
-        text: 'Too bad...'
+        text: 'Очень жаль...\nУ вас не осталось жизней. Попробуйте ещё раз!'
+        halign: 'center'
+    ImageButton:
+        source: 'icons/new_back.png'
+        size_hint: .08, .08
+        pos_hint: {'x':.01, 'y':.91}
+        on_press:
+            reset_lives()
+            root.manager.transition = NoTransition()
+            sns('quests')
+            root.manager.current = sns()
