@@ -97,12 +97,14 @@
                 source: 'icons/flag_uzao.jpg'
                 on_press:
                     life_count()
+                    self.source = ''
                     root.manager.current = sns()
             ImageButton:
                 id: img_btn_1
                 source: 'icons/flag_cao.jpg'
                 on_press:
                     life_count()
+                    self.source = ''
                     root.manager.current = sns()
             ImageButton:
                 id: img_btn_2
@@ -117,8 +119,9 @@
                 source: 'icons/flag_vao.jpg'
                 on_press:
                     life_count()
+                    self.source = ''
                     root.manager.current = sns()
-                
+
     ImageButton:
         source: 'icons/new_back.png'
         size_hint: .08, .08
@@ -127,6 +130,7 @@
             root.manager.transition = SlideTransition()
             root.manager.transition.direction = 'up'
             sns('main')
+            root.manager.current = sns()
     Label:
         id: zao1_score_label
         size_hint: .1, .1
@@ -165,18 +169,21 @@
                 source: 'icons/arka_irkutsk.jpg'
                 on_press:
                     life_count()
+                    self.source = ''
                     root.manager.current = sns()
             ImageButton:
                 id: img_btn_2
                 source: 'icons/arka_paris.jpg'
                 on_press:
                     life_count()
+                    self.source = ''
                     root.manager.current = sns()
             ImageButton:
                 id: img_btn_3
                 source: 'icons/arka_brussels.jpeg'
                 on_press:
                     life_count()
+                    self.source = ''
                     root.manager.current = sns()
 
     ImageButton:
@@ -213,6 +220,7 @@
                 text: '40 тыс. лет назад'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: '2-1 тысячелетие до н.э.'
@@ -224,11 +232,13 @@
                 text: 'IX-X век н.э.'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: '1147 год'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
@@ -265,16 +275,19 @@
                 text: 'Фили'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: 'Строгино'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: 'Очаково-Матвеевское'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: 'Кунцево'
@@ -321,6 +334,7 @@
                 text: 'Площадь Дорогомиловская Застава'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: 'Площадь Европы'
@@ -332,11 +346,13 @@
                 text: 'Площадь Индиры Ганди'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: 'Площадь Джавахарлала Неру'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
@@ -387,11 +403,13 @@
                 text: 'Корпус 2 ЖК Воробьёвы Горы'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: 'Гостиница Украина'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: 'Главное здание МГУ'
@@ -403,6 +421,7 @@
                 text: 'ЖК Дом на Мосфильмовской'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
@@ -453,12 +472,14 @@
                 text: 'Детский музыкальный театр\nимени И.Н.Сац'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 font_size: 23
                 text: 'Театр под предводительством\nАрмена Джигарханяна'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: 'Малый театр'
@@ -470,6 +491,7 @@
                 text: 'Театр на Юго-Западе'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
@@ -505,11 +527,13 @@
                 text: '9'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: '10'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: '13'
@@ -521,6 +545,7 @@
                 text: '14'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
@@ -548,7 +573,7 @@
         Label:
             id: zao_question
             size_hint: 1,.1
-            
+
             text: 'В каком из этих списков есть район, не входящий в ЗАО?'
         GridLayout:
             cols: 2
@@ -563,16 +588,19 @@
                 text: 'Очаково-Матвеевское,\nТропарево-Никулино, Солнцево,\nПроспект Вернадского'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: 'Кунцево, Можайский, Филевский\nпарк, Фили-Давыдково, Внуково'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: 'Ново-Переделкино, Солнцево,\nТропарево-Никулино, Дорогомилово'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
@@ -622,18 +650,21 @@
                 text: 'Государственный музей\nобороны Москвы'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 font_size: 23
                 text: 'Музей-панорама\n"Бородинская битва"'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 font_size: 23
                 text: 'Музей традиционных\nрусских напитков'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: 'Музей оружия'
@@ -675,6 +706,7 @@
                 text: 'Чемпионат мира по футболу\n2014 г.'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: 'Олимпиада\'80'
@@ -685,11 +717,13 @@
                 text: 'Фестиваль молодежи 1957 г.'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: '1000-летие крещения Руси'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
@@ -731,16 +765,19 @@
                 text: 'Этой горе поклонялись язычники'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: 'Здесь шли правителю на поклон'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
             Button:
                 text: 'Из-за особо большого наклона'
                 on_press:
                     life_count()
+                    self.disabled = True
                     root.manager.current = sns()
     ImageButton:
         source: 'icons/new_back.png'
